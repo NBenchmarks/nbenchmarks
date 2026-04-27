@@ -1,0 +1,117 @@
+---
+import SearchBar from '../components/SearchBar.astro';
+import PopularSidebar from '../components/PopularSidebar.astro';
+import Pagination from '../components/Pagination.astro';
+import { getCollection } from 'astro:content';
+import "../styles/site.css";
+
+const POSTS_PER_PAGE = 12;
+
+let allPosts = await getCollection('benchmarks');
+allPosts = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const hero = allPosts.length ? allPosts[0] : null;
+const allTags = [...new Set(allPosts.flatMap((p) => p.data.tags ?? []))];
+const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+const posts = allPosts.slice(0, POSTS_PER_PAGE);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>N Benchmarks | Gaming FPS Tests</title>
+    <meta name="description" content="Real-world GPU and CPU benchmark results. FPS data, charts, and analysis for RTX 4060, Ryzen 5600G, and more." />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="/">N Benchmarks</a>
+        <SearchBar />
+        <nav>
+          <a href="/">Home</a>
+          <a href="/most-popular">Popular Benchmarks</a>
+          <a href="/about">About</a>
+        </nav>
+      </header>
+
+      <!-- HERO -->
+      {hero && (
+        <section class="hero">
+          <div class="hero-card">
+            <div class="hero-left">
+              <div class="eyebrow">Benchmark</div>
+              <a href={`/benchmarks/${hero.id}`} style="text-decoration: none;">
+                <h1>{hero.data.title}</h1>
+              </a>
+              <div class="meta">
+                {new Date(hero.data.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}
+                {(hero.data.tags ?? []).length > 0 && <> &bull; {(hero.data.tags ?? []).join(' \u2022 ')}</>}
+              </div>
+              <div class="cta-row">
+                <a class="cta" href={`/benchmarks/${hero.id}`}>Read benchmark</a>
+                <span class="small">Latest of {allPosts.length}</span>
+              </div>
+            </div>
+            <div class="hero-right">
+              <a href={`/benchmarks/${hero.id}`}>
+                <img src={hero.data.thumb} alt={hero.data.title} />
+                </a>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- LATEST BENCHMARKS -->
+      <div class="section-title">
+        <h2>Latest Videos</h2>
+      </div>
+
+      <div class="page-body">
+        <main class="grid">
+          {posts.map((p) => (
+            <article class="card">
+              <a class="card-link" href={`/benchmarks/${p.id}`}>
+                <img loading="lazy" src={p.data.thumb} alt={p.data.title} />
+              </a>
+              <div class="card-body">
+                <div class="meta-row">
+                  <div class="meta-author">{p.data.author ?? 'N Benchmarks'}</div>
+                  <div class="meta-date">
+                    &bull; {new Date(p.data.date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                  </div>
+                </div>
+                <h3><a class="title-link" href={`/benchmarks/${p.id}`}>{p.data.title}</a></h3>
+                <div class="meta-bottom">
+                  <div class="small">{(p.data.tags ?? []).join(' \u2022 ')}</div>
+                  <a href={`/benchmarks/${p.id}`} class="cta card-cta">&rarr;</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </main>
+        
+        <aside class="page-sidebar">
+          <PopularSidebar />
+        </aside>
+        
+      </div>
+      
+        <Pagination currentPage={1} totalPages={totalPages} />
+
+      <footer>
+        &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
+      </footer>
+    
+    </div>
+  </body>
+</html>

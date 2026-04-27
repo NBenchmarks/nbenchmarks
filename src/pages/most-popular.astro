@@ -1,0 +1,152 @@
+---
+import { getCollection } from 'astro:content';
+import "../styles/site.css";
+import SearchBar from '../components/SearchBar.astro';
+import PopularSidebar from '../components/PopularSidebar.astro';
+
+const allPosts = await getCollection('benchmarks');
+allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>Most Popular Benchmarks | N Benchmarks</title>
+    <meta name="description" content="Search GPU and CPU benchmark results on N Benchmarks." />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header>
+        <a class="logo" href="/">N Benchmarks</a>
+        <SearchBar />
+        <nav>
+          <a href="/">Home</a>
+          <a href="/most-popular">Popular Benchmarks</a>
+          <a href="/about">About</a>
+        </nav>
+      </header>
+
+      <div class="section-title">
+        <h1 style="font-size: 26px;">Most Popular Benchmarks</h1>
+      </div>
+
+      <div class="page-body">
+        <main class="grid">
+            <article class="card">
+              <a class="card-link" href="../benchmarks/red-dead-redemption-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">
+                <img src="../../assets/benchmarks/thumbs/red-dead-redemption-2/rdr2-544x306.avif" alt="Red Dead Redemption 2 on RTX 4060 + Ryzen 5600G" />
+              </a>
+              <div class="card-body">
+                <div class="meta-row">
+                  <div class="meta-author">N Benchmarks</div>
+                  <div class="meta-date">
+                    • Feb 28, 2025
+                  </div>
+                </div>
+                <h3><a class="title-link" href="../benchmarks/red-dead-redemption-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">Red Dead Redemption 2 on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K</a></h3>
+                <div class="meta-bottom">
+                  <div class="small">RTX 4060 • Ryzen 5600G</div>
+                  <a href="../benchmarks/red-dead-redemption-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k" class="cta card-cta">&rarr;</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <a class="card-link" href="../benchmarks/the-witcher-3-next-gen-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">
+                <img src="../../assets/benchmarks/thumbs/the-witcher-3/witcher3-544x306.avif" alt="The Witcher 3 Next Gen on RTX 4060 + Ryzen 5600G" />
+              </a>
+              <div class="card-body">
+                <div class="meta-row">
+                  <div class="meta-author">N Benchmarks</div>
+                  <div class="meta-date">
+                    • Apr 14, 2025
+                  </div>
+                </div>
+                <h3><a class="title-link" href="../benchmarks/the-witcher-3-next-gen-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">The Witcher 3 Next-Gen on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K</a></h3>
+                <div class="meta-bottom">
+                  <div class="small">RTX 4060 • Ryzen 5600G</div>
+                  <a href="../benchmarks/the-witcher-3-next-gen-on-rtx-4060-ryzen-5600g-1080p-1440p-4k" class="cta card-cta">&rarr;</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <a class="card-link" href="../benchmarks/counter-strike-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">
+                <img src="../../assets/benchmarks/thumbs/counter-strike-2/cs2-544x306.avif" alt="Counter-Strike 2 on RTX 4060 + Ryzen 5600G" />
+              </a>
+              <div class="card-body">
+                <div class="meta-row">
+                  <div class="meta-author">N Benchmarks</div>
+                  <div class="meta-date">
+                    • Apr 19, 2025
+                  </div>
+                </div>
+                <h3><a class="title-link" href="../benchmarks/counter-strike-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">Counter-Strike 2 on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K</a></h3>
+                <div class="meta-bottom">
+                  <div class="small">RTX 4060 • Ryzen 5600G</div>
+                  <a href="../benchmarks/counter-strike-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k" class="cta card-cta">&rarr;</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <a class="card-link" href="../benchmarks/call-of-duty-warzone-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">
+                <img src="../../assets/benchmarks/thumbs/call-of-duty-warzone/warzone-544x306.avif" alt="Call of Duty: Warzone on RTX 4060 + Ryzen 5600G" />
+              </a>
+              <div class="card-body">
+                <div class="meta-row">
+                  <div class="meta-author">N Benchmarks</div>
+                  <div class="meta-date">
+                    • Apr 23, 2025
+                  </div>
+                </div>
+                <h3><a class="title-link" href="../benchmarks/call-of-duty-warzone-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">Call of Duty: Warzone on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K</a></h3>
+                <div class="meta-bottom">
+                  <div class="small">RTX 4060 • Ryzen 5600G</div>
+                  <a href="../benchmarks/call-of-duty-warzone-on-rtx-4060-ryzen-5600g-1080p-1440p-4k" class="cta card-cta">&rarr;</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <a class="card-link" href="../benchmarks/marvels-spider-man-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">
+                <img src="../../assets/benchmarks/thumbs/marvels-spider-man-2/spider-man-2-544x306.avif" alt="Marvel's Spider-Man 2 on RTX 4060 + Ryzen 5600G" />
+              </a>
+              <div class="card-body">
+                <div class="meta-row">
+                  <div class="meta-author">N Benchmarks</div>
+                  <div class="meta-date">
+                    • Feb 04, 2025
+                  </div>
+                </div>
+                <h3><a class="title-link" href="../benchmarks/marvels-spider-man-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k">Marvel’s Spider-Man 2 on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K</a></h3>
+                <div class="meta-bottom">
+                  <div class="small">RTX 4060 • Ryzen 5600G</div>
+                  <a href="../benchmarks/marvels-spider-man-2-on-rtx-4060-ryzen-5600g-1080p-1440p-4k" class="cta card-cta">&rarr;</a>
+                </div>
+              </div>
+            </article>
+          
+        </main>
+
+            <aside class="page-sidebar">
+              <PopularSidebar />
+            </aside>
+          </div>
+      
+      <footer>
+        &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
+      </footer>
+
+    </div>
+  </body>
+</html>

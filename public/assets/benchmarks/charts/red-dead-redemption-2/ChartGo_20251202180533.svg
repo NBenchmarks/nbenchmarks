@@ -1,0 +1,61 @@
+<svg width="700" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 700 500">
+<rect width="700" height="500" x="0" y="0" fill="url(#zr0-g0)"></rect>
+<path d="M0 0l700 0l0 500l-700 0Z" fill="none" stroke="#999999" class="zr0-cls-0"></path>
+<path d="M75.6899 451.5L650 451.5" fill="none" stroke="#d3d3d3" stroke-dasharray="1" class="zr0-cls-1"></path>
+<path d="M75.6899 389.5L650 389.5" fill="none" stroke="#d3d3d3" stroke-dasharray="1" class="zr0-cls-1"></path>
+<path d="M75.6899 326.5L650 326.5" fill="none" stroke="#d3d3d3" stroke-dasharray="1" class="zr0-cls-1"></path>
+<path d="M75.6899 264.5L650 264.5" fill="none" stroke="#d3d3d3" stroke-dasharray="1" class="zr0-cls-1"></path>
+<path d="M75.6899 202.5L650 202.5" fill="none" stroke="#d3d3d3" stroke-dasharray="1" class="zr0-cls-1"></path>
+<path d="M75.6899 140.5L650 140.5" fill="none" stroke="#d3d3d3" stroke-dasharray="1" class="zr0-cls-1"></path>
+<path d="M75.6899 78.5L650 78.5" fill="none" stroke="#d3d3d3" stroke-dasharray="1" class="zr0-cls-1"></path>
+<path d="M75.5 451L75.5 78" fill="none" stroke="black" stroke-linecap="round" class="zr0-cls-1"></path>
+<path d="M75.6899 451.5L650 451.5" fill="none" stroke="black" stroke-linecap="round" class="zr0-cls-1"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:Microsoft YaHei;" transform="translate(68.6899 451)" fill="black">0</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:Microsoft YaHei;" transform="translate(68.6899 388.8333)" fill="black">20</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:Microsoft YaHei;" transform="translate(68.6899 326.6667)" fill="black">40</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:Microsoft YaHei;" transform="translate(68.6899 264.5)" fill="black">60</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:Microsoft YaHei;" transform="translate(68.6899 202.3333)" fill="black">80</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:Microsoft YaHei;" transform="translate(68.6899 140.1667)" fill="black">100</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:13px;font-family:Microsoft YaHei;" transform="translate(68.6899 78)" fill="black">120</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:13px;font-family:Microsoft YaHei;" xml:space="preserve" y="6.5" transform="translate(171.4083 459)" fill="black">1080p Low</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:13px;font-family:Microsoft YaHei;" xml:space="preserve" y="6.5" transform="translate(362.845 459)" fill="black">1080p Optimized</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:13px;font-family:Microsoft YaHei;" xml:space="preserve" y="6.5" transform="translate(554.2817 459)" fill="black">1080p Max</text>
+<path d="M105.4 451l132.1 0l0 -338.8l-132.1 0Z" fill="url(#zr0-g1)" filter="url(#zr0-s0)" class="zr0-cls-2"></path>
+<path d="M296.8 451l132.1 0l0 -286l-132.1 0Z" fill="url(#zr0-g1)" filter="url(#zr0-s0)" class="zr0-cls-2"></path>
+<path d="M488.2 451l132.1 0l0 -121.2l-132.1 0Z" fill="url(#zr0-g1)" filter="url(#zr0-s0)" class="zr0-cls-2"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Microsoft YaHei;" y="-6" transform="translate(171.4083 107.1917)" fill="black" fill-opacity="0">109</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Microsoft YaHei;" y="-6" transform="translate(362.845 160.0333)" fill="black" fill-opacity="0">92</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Microsoft YaHei;" y="-6" transform="translate(554.2817 324.775)" fill="black" fill-opacity="0">39</text>
+<path d="M-130.5298 -5l261.0596 0l0 55l-261.0596 0Z" transform="translate(350 8)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#3c3c41" stroke-width="0" class="zr0-cls-1"></path>
+<path d="M-5 -5l10 0l0 10l-10 0Z" transform="translate(690 483)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#3c3c41" stroke-width="0" class="zr0-cls-1"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:20px;font-family:Microsoft YaHei;font-weight:bold;" xml:space="preserve" y="10" transform="translate(350 8)" fill="black">Red Dead Redemption 2</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:15px;font-family:Microsoft YaHei;font-weight:bold;" xml:space="preserve" y="37.5" transform="translate(350 8)" fill="black">RTX 4060 + Ryzen 5600G | 1080p</text>
+<defs >
+<linearGradient gradientUnits="objectBoundingBox" x1="0" y1="0" x2="0" y2="1" id="zr0-g0">
+<stop offset="0%" stop-color="#ffffff"></stop>
+<stop offset="100%" stop-color="#ffffff"></stop>
+</linearGradient>
+<linearGradient gradientUnits="objectBoundingBox" x1="0" y1="0" x2="0" y2="1" id="zr0-g1">
+<stop offset="0%" stop-color="rgb(50,205,50)" stop-opacity="0.7"></stop>
+<stop offset="100%" stop-color="rgb(35,143,35)" stop-opacity="0.7"></stop>
+</linearGradient>
+<filter id="zr0-s0" x="-100%" y="-100%" width="300%" height="300%">
+<feDropShadow dx="3" dy="3" stdDeviation="3 3" flood-color="rgb(0,0,0)" flood-opacity="0.5"></feDropShadow>
+</filter>
+</defs>
+<style ><![CDATA[
+.zr0-cls-0:hover {
+cursor:pointer;
+}
+.zr0-cls-1:hover {
+pointer-events:none;
+}
+.zr0-cls-2:hover {
+cursor:pointer;
+fill:[object Object];
+}
+
+]]>
+
+</style>
+</svg>

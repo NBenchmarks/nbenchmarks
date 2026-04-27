@@ -1,0 +1,13 @@
+{
+  "name": "N Benchmarks",
+  "short_name": "N Benchmarks",
+  "description": "Gaming benchmarks for RTX 4060 and Ryzen 5600G with real-world FPS tests, performance comparisons, and detailed analysis for PC gamers.",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#ff5a3c",
+  "background_color": "#f6f6f7",
+  "display": "standalone",
+  "start_url": "/"
+}

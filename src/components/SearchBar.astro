@@ -1,0 +1,203 @@
+<div class="search-wrapper" id="search-wrapper">
+  <div class="search-box">
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Search benchmarks…"
+      autocomplete="off"
+      spellcheck="false"
+      aria-label="Search benchmarks"
+    />
+    <button class="search-btn" id="search-btn" type="button" aria-label="Search">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+  </div>
+  <ul class="search-dropdown" id="search-dropdown" role="listbox" hidden></ul>
+</div>
+
+<script>
+  // ── Fuzzy scoring ──────────────────────────────────────────────
+  function getTrigrams(str: string): Set<string> {
+    const s = `  ${str.toLowerCase()}  `;
+    const tg = new Set<string>();
+    for (let i = 0; i < s.length - 2; i++) tg.add(s.slice(i, i + 3));
+    return tg;
+  }
+
+  function trigramSim(a: string, b: string): number {
+    const ta = getTrigrams(a);
+    const tb = getTrigrams(b);
+    let shared = 0;
+    for (const t of ta) if (tb.has(t)) shared++;
+    return (2 * shared) / (ta.size + tb.size);
+  }
+
+  type Post = {
+    id: string;
+    title: string;
+    excerpt: string;
+    thumb: string;
+    tags: string[];
+    url: string;
+  };
+
+  function scorePost(post: Post, query: string): number {
+    const q = query.toLowerCase().trim();
+    if (!q) return 0;
+    const title = post.title.toLowerCase();
+    const combined = `${title} ${post.tags.join(' ').toLowerCase()}`;
+
+    if (title === q)             return 100;
+    if (title.startsWith(q))    return 90;
+    if (title.includes(q))      return 80;
+    if (combined.includes(q))   return 70;
+
+    const words = q.split(/\s+/).filter(Boolean);
+    if (words.length > 0) {
+      const hits = words.filter(w => combined.includes(w)).length;
+      if (hits > 0) return 40 + (hits / words.length) * 25;
+    }
+
+    const sim = trigramSim(title, q);
+    return sim > 0.25 ? sim * 40 : 0;
+  }
+
+  // ── Data (lazy + cached) ───────────────────────────────────────
+  let allPosts: Post[] | null = null;
+  let fetchPromise: Promise<Post[]> | null = null;
+
+  async function getPosts(): Promise<Post[]> {
+    if (allPosts) return allPosts;
+    if (!fetchPromise) fetchPromise = fetch('/search-index.json').then(r => r.json());
+    allPosts = await fetchPromise;
+    return allPosts!;
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────
+  function esc(s: string) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function highlight(text: string, query: string): string {
+    const q = query.trim();
+    if (!q) return esc(text);
+    const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return esc(text).replace(re, '<mark>$1</mark>');
+  }
+
+  // ── DOM refs ───────────────────────────────────────────────────
+  const wrapper  = document.getElementById('search-wrapper')!;
+  const input    = document.getElementById('search-input') as HTMLInputElement;
+  const btn      = document.getElementById('search-btn')!;
+  const dropdown = document.getElementById('search-dropdown') as HTMLUListElement;
+
+  let activeIndex = -1;
+  let suggestions: Post[] = [];
+
+  // ── Actions ────────────────────────────────────────────────────
+  function go(url: string) { window.location.href = url; }
+
+  function doSearch(query: string) {
+    if (query.trim()) go(`/search?q=${encodeURIComponent(query.trim())}`);
+  }
+
+  function closeDropdown() {
+    dropdown.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    activeIndex = -1;
+    suggestions = [];
+  }
+
+  function setActive(index: number) {
+    const items = dropdown.querySelectorAll<HTMLLIElement>('.search-item');
+    items.forEach(el => el.classList.remove('active'));
+    activeIndex = index;
+    if (index >= 0 && index < items.length) {
+      items[index].classList.add('active');
+      items[index].scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  function renderDropdown(items: Post[], query: string) {
+    activeIndex = -1;
+    suggestions = items;
+    dropdown.innerHTML = '';
+
+    if (items.length === 0) { closeDropdown(); return; }
+
+    items.forEach((post, i) => {
+      const li = document.createElement('li');
+      li.className = 'search-item';
+      li.setAttribute('role', 'option');
+      li.innerHTML = `
+        <img class="search-item-thumb" src="${esc(post.thumb)}" alt="" loading="lazy" />
+        <div class="search-item-info">
+          <span class="search-item-title">${highlight(post.title, query)}</span>
+          ${post.tags.length ? `<span class="search-item-tags">${esc(post.tags.join(' · '))}</span>` : ''}
+        </div>
+      `;
+      li.addEventListener('click', () => go(post.url));
+      li.addEventListener('mouseenter', () => setActive(i));
+      dropdown.appendChild(li);
+    });
+
+    const footer = document.createElement('li');
+    footer.className = 'search-footer';
+    footer.innerHTML = `Press <kbd>Enter</kbd> to search for "<strong>${esc(query)}</strong>"`;
+    dropdown.appendChild(footer);
+
+    dropdown.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+
+  // ── Events ─────────────────────────────────────────────────────
+  input.addEventListener('input', async () => {
+    const q = input.value;
+    if (!q.trim()) { closeDropdown(); return; }
+
+    const posts = await getPosts();
+    const results = posts
+      .map(p => ({ post: p, score: scorePost(p, q) }))
+      .filter(x => x.score > 5)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6)
+      .map(x => x.post);
+
+    renderDropdown(results, q);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    const items = dropdown.querySelectorAll<HTMLLIElement>('.search-item');
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive(Math.min(activeIndex + 1, items.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = activeIndex - 1;
+      if (next < 0) { activeIndex = -1; items.forEach(el => el.classList.remove('active')); }
+      else setActive(next);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (activeIndex >= 0 && suggestions[activeIndex]) go(suggestions[activeIndex].url);
+      else doSearch(input.value);
+    } else if (e.key === 'Escape') {
+      closeDropdown();
+      input.blur();
+    }
+  });
+
+  btn.addEventListener('click', () => doSearch(input.value));
+
+  document.addEventListener('click', (e) => {
+    if (!wrapper.contains(e.target as Node)) closeDropdown();
+  });
+
+  // Pré-carrega os dados assim que o usuário foca no campo
+  input.addEventListener('focus', () => { getPosts(); }, { once: true });
+</script>

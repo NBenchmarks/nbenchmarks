@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import "../../styles/site.css";
+import SearchBar from '../../components/SearchBar.astro';
+import PopularSidebar from '../../components/PopularSidebar.astro';
+import Pagination from '../../components/Pagination.astro';
+import type { GetStaticPathsOptions, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  let posts = await getCollection('benchmarks');
+  posts = posts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+  return paginate(posts, { pageSize: 12 });
+}
+
+const { page } = Astro.props as { page: Page<CollectionEntry<'benchmarks'>> };
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>N Benchmarks | Page {page.currentPage}</title>
+    <meta name="description" content={`GPU and CPU benchmark results — page ${page.currentPage}.`} />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header>
+        <a class="logo" href="/">N Benchmarks</a>
+        <SearchBar />
+        <nav>
+          <a href="/">Home</a>
+          <a href="/most-popular">Popular Benchmarks</a>
+          <a href="/about">About</a>
+        </nav>
+      </header>
+
+      <div class="section-title" style="margin-bottom: 20px;">
+        <h2>Latest Videos <span style="font-weight:400; color:var(--muted); font-size:18px;">— Page {page.currentPage}</span></h2>
+      </div>
+
+      <div class="page-body">
+        <div>
+          <main class="grid">
+            {page.data.map((p) => (
+              <article class="card">
+                <a class="card-link" href={`/benchmarks/${p.id}`}>
+                  <img src={p.data.thumb} alt={p.data.title} loading="lazy" />
+                </a>
+                <div class="card-body">
+                  <div class="meta-row">
+                    <div class="meta-author">{p.data.author ?? 'N Benchmarks'}</div>
+                    <div class="meta-date">
+                      &bull; {new Date(p.data.date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                    </div>
+                  </div>
+                  <h3><a class="title-link" href={`/benchmarks/${p.id}`}>{p.data.title}</a></h3>
+                  <div class="meta-bottom">
+                    <div class="small">{(p.data.tags ?? []).join(' \u2022 ')}</div>
+                    <a href={`/benchmarks/${p.id}`} class="cta card-cta">&rarr;</a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </main>
+
+          
+        </div>
+
+        <aside class="page-sidebar">
+          <PopularSidebar />
+        </aside>
+      </div>
+
+      <Pagination currentPage={page.currentPage} totalPages={page.lastPage} />
+
+      <footer>
+        &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
+      </footer>
+    </div>
+  </body>
+</html>

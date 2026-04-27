@@ -1,0 +1,166 @@
+---
+import { getCollection } from 'astro:content';
+import "../styles/site.css";
+import SearchBar from '../components/SearchBar.astro';
+import PopularSidebar from '../components/PopularSidebar.astro';
+
+const allPosts = await getCollection('benchmarks');
+allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>Search | N Benchmarks</title>
+    <meta name="description" content="Search GPU and CPU benchmark results on N Benchmarks." />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header>
+        <a class="logo" href="/">N Benchmarks</a>
+        <SearchBar />
+        <nav>
+          <a href="/">Home</a>
+          <a href="/most-popular">Popular Benchmarks</a>
+          <a href="/about">About</a>
+        </nav>
+      </header>
+
+      <div id="search-heading" style="margin-bottom:20px">
+      <h1 style="font-size:26px; margin:0 0 4px" id="search-title"></h1>
+      <p style="color:var(--muted); font-size:14px; margin:0" id="search-subtitle"></p>
+</div>
+
+  <div class="page-body">
+    <div>
+      <div id="results-grid" class="grid"></div>
+      <div id="no-results" class="no-results" hidden>
+        <h2>No benchmarks found</h2>
+        <p>Try a different search term, like a game name or GPU model.</p>
+        <a class="cta" href="/" style="display:inline-block; margin-top:20px">&larr; Browse all benchmarks</a>
+      </div>
+    </div>
+
+  <aside class="page-sidebar">
+    <PopularSidebar />
+  </aside>
+</div>
+      
+      <footer>
+        &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
+      </footer>
+
+    </div>
+  </body>
+</html>
+
+<script>
+  function getTrigrams(str: string): Set<string> {
+    const s = `  ${str.toLowerCase()}  `;
+    const tg = new Set<string>();
+    for (let i = 0; i < s.length - 2; i++) tg.add(s.slice(i, i + 3));
+    return tg;
+  }
+  function trigramSim(a: string, b: string): number {
+    const ta = getTrigrams(a); const tb = getTrigrams(b);
+    let shared = 0;
+    for (const t of ta) if (tb.has(t)) shared++;
+    return (2 * shared) / (ta.size + tb.size);
+  }
+  type Post = { id: string; title: string; thumb: string; tags: string[]; url: string; date: string; };
+
+  function scorePost(post: Post, query: string): number {
+    const q = query.toLowerCase().trim();
+    if (!q) return 0;
+    const title = post.title.toLowerCase();
+    const combined = `${title} ${post.tags.join(' ').toLowerCase()}`;
+    if (title === q)           return 100;
+    if (title.startsWith(q))  return 90;
+    if (title.includes(q))    return 80;
+    if (combined.includes(q)) return 70;
+    const words = q.split(/\s+/).filter(Boolean);
+    if (words.length > 0) {
+      const hits = words.filter(w => combined.includes(w)).length;
+      if (hits > 0) return 40 + (hits / words.length) * 25;
+    }
+    const sim = trigramSim(title, q);
+    return sim > 0.25 ? sim * 40 : 0;
+  }
+
+  function esc(s: string) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderResults(posts: Post[], query: string) {
+    const title    = document.getElementById('search-title')!;
+    const subtitle = document.getElementById('search-subtitle')!;
+    const grid     = document.getElementById('results-grid')!;
+    const empty    = document.getElementById('no-results') as HTMLElement;
+
+    title.textContent = query ? `Results for "${query}"` : 'All Benchmarks';
+
+    if (posts.length === 0) {
+      grid.innerHTML = '';
+      empty.hidden = false;
+      subtitle.textContent = 'No benchmarks matched your search.';
+      return;
+    }
+
+    empty.hidden = true;
+    subtitle.textContent = `${posts.length} benchmark${posts.length !== 1 ? 's' : ''} found`;
+
+    grid.innerHTML = posts.map(p => `
+      <article class="card">
+        <a class="card-link" href="${esc(p.url)}">
+          <img src="${esc(p.thumb)}" alt="${esc(p.title)}" loading="lazy" />
+        </a>
+        <div class="card-body">
+          <div class="meta-row">
+            <div class="meta-date">
+              ${new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+            </div>
+          </div>
+          <h3><a class="title-link" href="${esc(p.url)}">${esc(p.title)}</a></h3>
+          <div class="meta-bottom">
+            <div class="small">${esc(p.tags.join(' \u2022 '))}</div>
+            <a href="${esc(p.url)}" class="cta card-cta">&rarr;</a>
+          </div>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  async function init() {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q') ?? '';
+
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    if (searchInput && query) searchInput.value = query;
+
+    const posts: Post[] = await fetch('/search-index.json').then(r => r.json());
+
+    if (!query.trim()) {
+      renderResults(posts, '');
+      return;
+    }
+
+    const results = posts
+      .map(p => ({ post: p, score: scorePost(p, query) }))
+      .filter(x => x.score > 5)
+      .sort((a, b) => b.score - a.score)
+      .map(x => x.post);
+
+    renderResults(results, query);
+  }
+
+  init();
+</script>

@@ -1,0 +1,122 @@
+---
+/*
+  src/pages/benchmarks/[slug].astro
+  Dynamic post page for the "benchmarks" content collection.
+*/
+
+import SearchBar from '../../components/SearchBar.astro';
+import PopularSidebar from '../../components/PopularSidebar.astro';
+import { getCollection, render } from 'astro:content';
+import "../../styles/site.css";
+import "../../styles/post.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection('benchmarks');
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{post.data.title} | N Benchmarks</title>
+    <meta property="og:title" content={`${post.data.title} — N Benchmarks`} />
+    {post.data.thumb && <meta property="og:image" content={post.data.thumb} />}
+    <meta property="og:type" content="article" />
+    <meta name="description" content={`${post.data.title}. FPS test on RTX 4060 + Ryzen 5600G.`} />
+    <meta property="og:description" content={`${post.data.title}. FPS test on RTX 4060 + Ryzen 5600G.`} />
+    <meta property="og:url" content={`https://seudominio.com/benchmarks/${post.id}`} />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header>
+        <a class="logo" href="/">N Benchmarks</a>
+        <SearchBar />
+        <nav>
+          <a href="/">Home</a>
+          <a href="/most-popular">Popular Benchmarks</a>
+          <a href="/about">About</a>
+        </nav>
+      </header>
+
+      <main class="post-page">
+        <article class="post-article-card">
+
+          <!-- breadcrumb -->
+          <div class="post-breadcrumb">
+            <a href="/">Home</a> &rsaquo; <span>{post.data.title}</span>
+          </div>
+
+          <div class="post-grid">
+
+            <!-- LEFT: main content -->
+            <div>
+              <div class="eyebrow">Benchmark</div>
+              <h1 class="post-title">{post.data.title}</h1>
+
+              <div class="post-meta">
+                {new Date(post.data.date).toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' })}
+                {(post.data.tags ?? []).length > 0 && <> &bull; {(post.data.tags ?? []).join(' \u2022 ')}</>}
+              </div>
+
+              {post.data.heroImage && (
+                <img class="post-thumb" src={post.data.heroImage} alt={post.data.title} />
+              )}
+
+              <!-- Rendered Markdown content -->
+              <div class="post-content">
+                <Content />
+              </div>
+            </div>
+
+            <!-- RIGHT: sidebar -->
+            <aside class="post-aside">
+              <div class="details-card">
+                <div class="details-title">TEST RIG</div>
+                <ul class="specs-list">
+                  <li><strong>GPU</strong> NVIDIA GeForce RTX 4060 8 GB</li>
+                  <li><strong>CPU</strong> AMD Ryzen 5 5600G</li>
+                  <li><strong>RAM</strong> 16 GB DDR4 3400 MHz</li>
+                  <li><strong>MB</strong> ASUS B450M Gaming</li>
+                  <li><strong>SSD</strong> Kingston NV1 500 GB NVMe</li>
+                </ul>
+
+
+                <div class="details-actions">
+                  {post.data.videoUrl && (
+                    <a class="cta" href={post.data.videoUrl} target="_blank" rel="noopener noreferrer">
+                      &#9654; &thinsp; Watch on YouTube
+                    </a>
+                  )}
+                  <a class="cta cta-secondary" href="/">&#8592; &thinsp; All benchmarks</a>
+                </div>
+              </div>
+              <PopularSidebar />
+            </aside>
+
+          </div>
+        </article>
+      </main>
+
+      <footer>
+        &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
+      </footer>
+
+    </div>
+  </body>
+</html>

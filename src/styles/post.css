@@ -1,0 +1,272 @@
+/* =========================================
+   post.css — styles for /benchmarks/[slug]
+   ========================================= */
+
+.post-page {
+  margin-bottom: 60px;
+}
+
+.post-breadcrumb {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.post-breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.post-breadcrumb a:hover {
+  color: var(--accent);
+}
+
+.post-article-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  min-width: 0;
+}
+
+/* Two-column layout: content | sidebar */
+
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr 271px;
+  gap: 25px;
+  align-items: start;
+}
+
+.post-title {
+  font-size: 32px;
+  margin: 10px 0 8px;
+  line-height: 1.25;
+}
+
+.post-meta {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.post-thumb {
+  width: auto;
+  height: 425px;
+  margin: auto;
+  border-radius: var(--radius);
+  display: block;
+  margin-bottom: 24px;
+  object-fit: cover;
+}
+
+/* Article body */
+
+.post-content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1a1a2e;
+}
+
+.post-content h2 {
+  margin: 12px 0 12px;
+}
+
+.post-content h3 {
+  font-size: 18px;
+  margin: 24px 0 8px;
+}
+
+.post-content p  { 
+  margin: 0 0 16px; 
+}
+
+.post-content ul, .post-content ol { 
+  padding-left: 20px; 
+  margin: 0 0 16px; 
+}
+
+.post-content li { 
+  margin-bottom: 6px; 
+}
+
+.post-content a  { 
+  color: var(--accent); 
+}
+
+.post-content iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: var(--radius);
+  margin: 20px 0;
+}
+
+/* Sidebar */
+
+.post-aside {
+  position: sticky;
+  top: 24px;
+}
+
+.details-card {
+  background: #f6f6f7;
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.details-title {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.specs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.specs-list li {
+  font-size: 13px;
+  color: #333;
+}
+
+.specs-list li strong {
+  display: inline-block;
+  width: 40px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.details-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cta-secondary {
+  background: transparent;
+  color: #0f1724;
+  border: 2px solid var(--accent);
+}
+
+.cta-secondary:hover {
+  background: var(--accent);
+  color: #fff;
+  transition: 0.15s ease;
+}
+
+.sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  background: #f6f6f7;
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 14px;
+}
+
+.sidebar-heading {
+  display: block;
+  width: 100%;
+  background-color: var(--accent);
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 700;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.sidebar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.sidebar-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.sidebar-img {
+  width: 120px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.sidebar-p {
+  margin: 0;
+  font-weight: 600;
+  color: #0f1724;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Responsive */
+
+@media (max-width: 1125px) {
+  
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+  .post-aside {
+    max-width: 400px;
+    margin: 0 auto;
+    position: static;
+  }
+}
+
+@media (max-width: 830px) {
+  
+  .post-thumb {
+    width: 100%;
+    height: auto;
+  }
+
+}
+
+@media (max-width: 600px) {
+  
+  .post-article-card {
+    padding: 20px 16px;
+  }
+
+  .post-title {
+    font-size: 24px;
+  }
+
+  .fps-bar {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 550px) {
+  
+  .sidebar-img, .sidebar-p {
+    display: block;
+  }
+
+}
