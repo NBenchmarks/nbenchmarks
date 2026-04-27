@@ -1,21 +1,13 @@
 ---
 import SearchBar from '../components/SearchBar.astro';
 import PopularSidebar from '../components/PopularSidebar.astro';
+import Head from "../components/Head.astro"
 import "../styles/site.css";
 ---
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>About | N Benchmarks</title>
-    <meta name="description" content="About N Benchmarks — real-world GPU and CPU performance tests on an RTX 4060 + Ryzen 5 5600G build." />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <Head title="About | N Benchmarks" />
   </head>
   <body>
     <div class="wrap">
@@ -59,10 +51,10 @@ import "../styles/site.css";
             </p>
             <h2>Methodology</h2>
             <p>
-              All tests are run at the graphics preset stated in each post with no manual
-              driver tweaks or overclocking unless explicitly mentioned. I capture FPS data
-              using CapFrameX and record footage with OBS.
+              All tests use the graphics preset stated in each video section. FPS data is captured with MSI Afterburner and Rivatuner Statistics Server, and footage is recorded with the NVIDIA App.
             </p>
+            <h2>Contact</h2>
+            <p>For business inquiries, please email me at <strong>nbenchmarks@gmail.com</strong>, and I will get back to you as soon as possible.</p>
             <a class="cta" href="/" style="display:inline-block; margin-top:24px; color: #fff;">
               &larr; Back to benchmarks
             </a>
@@ -75,6 +67,7 @@ import "../styles/site.css";
       </div>
 
       <footer>
+        <a href="/privacy">Privacy Policy</a>
         &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
       </footer>
 

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import "../styles/site.css";
 import SearchBar from '../components/SearchBar.astro';
 import PopularSidebar from '../components/PopularSidebar.astro';
+import Head from '../components/Head.astro'
 
 const allPosts = await getCollection('benchmarks');
 allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
@@ -11,16 +12,7 @@ allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>Search | N Benchmarks</title>
-    <meta name="description" content="Search GPU and CPU benchmark results on N Benchmarks." />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <Head title="Search | N Benchmarks" />
   </head>
   <body>
     <div class="wrap">
@@ -56,6 +48,7 @@ allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).
 </div>
       
       <footer>
+        <a href="/privacy">Privacy Policy</a>
         &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
       </footer>
 

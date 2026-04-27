@@ -2,6 +2,7 @@
 import SearchBar from '../components/SearchBar.astro';
 import PopularSidebar from '../components/PopularSidebar.astro';
 import Pagination from '../components/Pagination.astro';
+import Head from '../components/Head.astro'
 import { getCollection } from 'astro:content';
 import "../styles/site.css";
 
@@ -21,16 +22,7 @@ const posts = allPosts.slice(0, POSTS_PER_PAGE);
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>N Benchmarks | Gaming FPS Tests</title>
-    <meta name="description" content="Real-world GPU and CPU benchmark results. FPS data, charts, and analysis for RTX 4060, Ryzen 5600G, and more." />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <Head title="N Benchmarks | Gaming FPS Tests" />
   </head>
   <body>
     <div class="wrap">
@@ -64,7 +56,7 @@ const posts = allPosts.slice(0, POSTS_PER_PAGE);
             </div>
             <div class="hero-right">
               <a href={`/benchmarks/${hero.id}`}>
-                <img src={hero.data.thumb} alt={hero.data.title} />
+                <img fetchpriority="high" src={hero.data.thumb} alt={hero.data.title} />
                 </a>
             </div>
           </div>
@@ -109,6 +101,7 @@ const posts = allPosts.slice(0, POSTS_PER_PAGE);
         <Pagination currentPage={1} totalPages={totalPages} />
 
       <footer>
+        <a href="/privacy">Privacy Policy</a>
         &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
       </footer>
     

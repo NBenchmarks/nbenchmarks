@@ -1,0 +1,112 @@
+---
+import SearchBar from '../components/SearchBar.astro';
+import PopularSidebar from '../components/PopularSidebar.astro';
+import Head from "../components/Head.astro"
+import "../styles/site.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title="Privacy Policy | N Benchmarks" />
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header>
+        <a class="logo" href="/">N Benchmarks</a>
+        <SearchBar />
+        <nav>
+          <a href="/">Home</a>
+          <a href="/most-popular">Popular Benchmarks</a>
+          <a href="/about">About</a>
+        </nav>
+      </header>
+
+      <div class="page-body">
+        <main>
+          <div class="about-card">
+            <div class="eyebrow">Privacy Policy</div>
+                <h1>Privacy Policy for N Benchmarks</h1>
+                <p>Last updated: 27 de Abril de 2026</p>
+
+                <p>At <strong>N Benchmarks</strong>, accessible from <strong>https://nbenchmarks.pages.dev/</strong>, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by N Benchmarks and how we use it.</p>
+
+                <h2>1. Log Files</h2>
+                <p>N Benchmarks follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this as part of hosting services' analytics. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.</p>
+
+                <h2>2. Cookies and Web Beacons</h2>
+                <p>Like any other website, N Benchmarks uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+
+                <h2>3. Google DoubleClick DART Cookie</h2>
+                <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our site and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></p>
+
+                <h2>4. Google AdSense</h2>
+                <p>Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on N Benchmarks, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see.</p>
+
+                <h2>5. Third Party Privacy Policies</h2>
+                <p>N Benchmarks's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information.</p>
+
+                <h2>6. Contact Information</h2>
+                <p>If you have questions or require more information about our Privacy Policy, do not hesitate to contact us:</p>
+                <ul>
+                    <li><strong>Email: nbenchmarks@gmail.com</strong></li>
+                </ul>
+          </div>
+        </main>
+
+        <aside class="page-sidebar">
+          <PopularSidebar />
+        </aside>
+      </div>
+
+      <footer>
+        <a href="/privacy">Privacy Policy</a>
+        &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
+      </footer>
+
+    </div>
+  </body>
+</html>
+
+<style>
+  .about-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 40px 48px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .about-card h1 {
+    font-size: 32px;
+    margin: 10px 0 20px;
+  }
+  .about-card h2 {
+    font-size: 20px;
+    margin: 32px 0 12px;
+  }
+  .about-card p {
+    line-height: 1.7;
+    color: #222;
+    margin: 0 0 16px;
+  }
+  .about-card a {
+    color: var(--accent);
+  }
+  .about-specs {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 16px;
+  }
+  .about-specs li {
+    font-size: 15px;
+    color: #333;
+  }
+  @media (max-width: 600px) {
+    .about-card { padding: 24px 20px; }
+  }
+</style>

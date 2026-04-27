@@ -7,6 +7,7 @@
 import SearchBar from '../../components/SearchBar.astro';
 import PopularSidebar from '../../components/PopularSidebar.astro';
 import { getCollection, render } from 'astro:content';
+import Head from '../../components/Head.astro'
 import "../../styles/site.css";
 import "../../styles/post.css";
 
@@ -25,21 +26,7 @@ const { Content } = await render(post);
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>{post.data.title} | N Benchmarks</title>
-    <meta property="og:title" content={`${post.data.title} — N Benchmarks`} />
-    {post.data.thumb && <meta property="og:image" content={post.data.thumb} />}
-    <meta property="og:type" content="article" />
-    <meta name="description" content={`${post.data.title}. FPS test on RTX 4060 + Ryzen 5600G.`} />
-    <meta property="og:description" content={`${post.data.title}. FPS test on RTX 4060 + Ryzen 5600G.`} />
-    <meta property="og:url" content={`https://seudominio.com/benchmarks/${post.id}`} />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <Head title={post.data.title} />
   </head>
   <body>
     <div class="wrap">
@@ -114,6 +101,7 @@ const { Content } = await render(post);
       </main>
 
       <footer>
+        <a href="/privacy">Privacy Policy</a>
         &copy; {new Date().getFullYear()} N Benchmarks &mdash; All rights reserved
       </footer>
 
