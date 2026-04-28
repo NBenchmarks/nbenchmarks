@@ -1,5 +1,6 @@
 ---
 title: "Cyberpunk 2077 on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run Cyberpunk 2077? Let's find out!"
 date: "2025-03-06"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/EHP-f6ZrMWo/maxresdefault.jpg"

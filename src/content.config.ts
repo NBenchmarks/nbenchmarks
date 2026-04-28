@@ -6,6 +6,7 @@ const benchmarks = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/benchmarks' }),
   schema: z.object({
     title: z.string(),
+    description: z.string().optional(),
     date: z.string(),
     author: z.string().optional(),
     heroImage: z.string().optional(),

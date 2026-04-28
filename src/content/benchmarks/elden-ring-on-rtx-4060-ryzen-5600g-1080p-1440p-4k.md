@@ -1,5 +1,6 @@
 ---
 title: "Elden Ring on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run Elden Ring? Let's find out!"
 date: "2025-03-17"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/l9-RV7at9Uk/maxresdefault.jpg"

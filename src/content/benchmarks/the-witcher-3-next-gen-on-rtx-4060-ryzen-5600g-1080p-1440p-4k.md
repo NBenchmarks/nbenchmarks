@@ -1,5 +1,6 @@
 ---
 title: "The Witcher 3 Next-Gen on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run The Witcher 3 Next-Gen? Let's find out!"
 date: "2025-04-15"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/eP_0iWZrhZM/maxresdefault.jpg"

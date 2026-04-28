@@ -1,5 +1,6 @@
 ---
 title: "Death Stranding 2: LOW to ULTRA (RTX 4060 + Ryzen 5600G) - Benchmark"
+description: "Can the RTX 4060 run Death Stranding 2? Let's find out!"
 date: "2026-03-23"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/djfvd8UUzeI/maxresdefault.jpg"

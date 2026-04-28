@@ -1,5 +1,6 @@
 ---
 title: "Wuthering Waves at 120 FPS on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run Wuthering Waves at 120 FPS? Let's find out!"
 date: "2025-01-06"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/AuccX3ZwUUM/maxresdefault.jpg"

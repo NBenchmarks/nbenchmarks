@@ -1,5 +1,6 @@
 ---
 title: "The Last of Us Part II Remastered on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run The Last of Us Part II? Let's find out!"
 date: "2025-04-05"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/yoon2-DCu40/maxresdefault.jpg"

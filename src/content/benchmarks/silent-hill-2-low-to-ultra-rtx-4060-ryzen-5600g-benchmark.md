@@ -1,5 +1,6 @@
 ---
 title: "SILENT HILL 2: LOW to ULTRA (RTX 4060 + Ryzen 5600G) - Benchmark"
+description: "Can the RTX 4060 run SILENT HILL 2? Let's find out!"
 date: "2025-08-24"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/DBniMq8vfNI/maxresdefault.jpg"

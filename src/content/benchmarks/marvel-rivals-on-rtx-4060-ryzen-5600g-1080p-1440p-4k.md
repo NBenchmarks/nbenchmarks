@@ -1,5 +1,6 @@
 ---
 title: "Marvel Rivals on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run Marvel Rivals? Let's find out!"
 date: "2025-01-14"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/BaQYmdrapbc/maxresdefault.jpg"

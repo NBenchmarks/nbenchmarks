@@ -1,5 +1,6 @@
 ---
 title: "Marvel’s Spider-Man 2 on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run Marvel's Spider-Man 2? Let's find out!"
 date: "2025-02-05"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/ZJj4OiIbMos/maxresdefault.jpg"

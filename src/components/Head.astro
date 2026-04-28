@@ -1,6 +1,13 @@
 ---
 // src/components/Head.astro
- const { title = "N Benchmarks | Gaming FPS Tests" } = Astro.props;
+const { 
+  title = "N Benchmarks | Gaming FPS Tests",
+  description
+} = Astro.props;
+
+const defaultDescription = "Gaming benchmarks on budget hardware featuring the RTX 4060 and Ryzen 5 5600G.";
+
+const finalDescription = description || defaultDescription;
 ---
 
     <meta charset="utf-8" />
@@ -8,7 +15,7 @@
     <meta name="google-site-verification" content="6e4x7s0GBTEGZTWYzogcdIyNEgPmRAkcasnFh42sHM8" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
-    <meta name="description" content="Real-world GPU and CPU benchmark results. FPS data, charts, and analysis for RTX 4060, Ryzen 5600G, and more." />
+    <meta name="description" content={finalDescription} />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

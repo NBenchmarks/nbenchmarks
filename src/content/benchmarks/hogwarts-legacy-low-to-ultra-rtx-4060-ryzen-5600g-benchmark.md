@@ -1,5 +1,6 @@
 ---
 title: "Hogwarts Legacy: LOW to ULTRA (RTX 4060 + Ryzen 5600G) - Benchmark"
+description: "Can the RTX 4060 run Hogwarts Legacy? Let's find out!"
 date: "2025-12-28"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/-D0uGVj41JI/maxresdefault.jpg"

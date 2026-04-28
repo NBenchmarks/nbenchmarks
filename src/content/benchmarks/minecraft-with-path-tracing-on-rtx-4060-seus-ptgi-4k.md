@@ -1,5 +1,6 @@
 ---
 title: "Minecraft with Path Tracing on RTX 4060 | SEUS PTGI | 4K"
+description: "Can the RTX 4060 run Minecraft with Path Tracing? Let's find out!"
 date: "2025-01-08"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/l_2JS4LuQOc/maxresdefault.jpg"

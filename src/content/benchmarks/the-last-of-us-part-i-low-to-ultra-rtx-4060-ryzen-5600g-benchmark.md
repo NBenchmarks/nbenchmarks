@@ -1,5 +1,6 @@
 ---
 title: "The Last of Us Part I: LOW to ULTRA (RTX 4060 + Ryzen 5600G) - Benchmark"
+description: "Can the RTX 4060 run The Last of Us Part I? Let's find out!"
 date: "2026-03-14"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/FYY1f1KvXzs/maxresdefault.jpg"

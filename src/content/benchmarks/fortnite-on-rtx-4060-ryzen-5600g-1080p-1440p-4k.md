@@ -1,5 +1,6 @@
 ---
 title: "Fortnite on RTX 4060 + Ryzen 5600G – 1080p/1440p/4K"
+description: "Can the RTX 4060 run Fortnite? Let's find out!"
 date: "2025-01-21"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/bZ-mAcYt8aU/maxresdefault.jpg"

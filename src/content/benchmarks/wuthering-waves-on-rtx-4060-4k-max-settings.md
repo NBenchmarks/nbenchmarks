@@ -1,5 +1,6 @@
 ---
 title: "Wuthering Waves on RTX 4060 | 4K MAX Settings!"
+description: "Can the RTX 4060 run Wuthering Waves? Let's find out!"
 date: "2025-01-03"
 author: "N Benchmarks"
 thumb: "https://img.youtube.com/vi/TB91zQFEAUw/maxresdefault.jpg"
