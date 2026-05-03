@@ -1,5 +1,6 @@
 ---
 title: "Samson: LOW to ULTRA (RTX 4060 + Ryzen 5600G) - Benchmark"
+description: "Can the RTX 4060 run Samson? Let's find out!"
 date: "2026-04-09"
 author: "N Benchmarks"
 heroImage: "/assets/benchmarks/posts-hero/samson/samson2.avif"
