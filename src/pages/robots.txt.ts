@@ -8,7 +8,6 @@ Sitemap: ${sitemapURL.href}
 `;
 
 export const GET: APIRoute = ({ site }) => {
-  // Changed name from'sitemap-index.xml' to 'sitemap_final.xml'
-  const sitemapURL = new URL('sitemap_final.xml', site); 
+  const sitemapURL = new URL('sitemap_index.xml', site); 
   return new Response(getRobotsTxt(sitemapURL));
 };
